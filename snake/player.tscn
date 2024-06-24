@@ -1,0 +1,80 @@
+[gd_scene load_steps=12 format=3 uid="uid://bxln6e5nwu8ls"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_lyq0x"]
+[ext_resource type="Texture2D" uid="uid://cwx2bav4d6nn3" path="res://sprites/snake/another_snake_pion_3.png" id="2_nkfcj"]
+[ext_resource type="Texture2D" uid="uid://h6d0mbndagkh" path="res://sprites/snake/another_snake_pion_4.png" id="3_yt2fe"]
+[ext_resource type="Texture2D" uid="uid://dhx3hcdkc4oum" path="res://sprites/snake/another_snake_3.png" id="4_faoet"]
+[ext_resource type="Texture2D" uid="uid://bq1cluuynfmed" path="res://sprites/snake/another_snake_4.png" id="5_o8nv1"]
+[ext_resource type="Texture2D" uid="uid://cp45uvgaimvfk" path="res://sprites/snake/another_snake_1.png" id="6_hapc8"]
+[ext_resource type="Texture2D" uid="uid://dls7ny5x070ia" path="res://sprites/snake/another_snake_2.png" id="7_5yxlv"]
+[ext_resource type="Texture2D" uid="uid://c5162c2hobevy" path="res://sprites/snake/another_snake_pion_1.png" id="8_folxx"]
+[ext_resource type="Texture2D" uid="uid://co6u4uratki1t" path="res://sprites/snake/another_snake_pion_2.png" id="9_kw1jf"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yf0pw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_nkfcj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_yt2fe")
+}],
+"loop": true,
+"name": &"down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_faoet")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_o8nv1")
+}],
+"loop": true,
+"name": &"left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_hapc8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_5yxlv")
+}],
+"loop": true,
+"name": &"right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_folxx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_kw1jf")
+}],
+"loop": true,
+"name": &"up",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e7ip8"]
+radius = 0.0
+height = 0.0
+
+[node name="Player" type="Area2D"]
+position = Vector2(32, 24)
+script = ExtResource("1_lyq0x")
+metadata/_edit_group_ = true
+
+[node name="snake" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_yf0pw")
+animation = &"right"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(20, 20)
+shape = SubResource("CapsuleShape2D_e7ip8")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
